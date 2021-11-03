@@ -3,12 +3,18 @@ package allPages;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import steps.BaseSteps;
 
 import java.util.ArrayList;
 
 public class BasePage {
 
-    WebDriver driver;
+    WebDriver driver = BaseSteps.getDriver();
+
+    public BasePage() {
+        PageFactory.initElements(driver, this);
+    }
 
     public void setField(WebElement element, String value) {
         element.clear();
@@ -25,7 +31,6 @@ public class BasePage {
     }
 
     public void switchTab(String title) {
-        String activeTab = driver.getWindowHandle();
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         for (String tab : tabs) {
             driver.switchTo().window(tab);

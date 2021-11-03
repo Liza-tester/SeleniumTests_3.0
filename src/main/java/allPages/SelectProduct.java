@@ -1,16 +1,15 @@
 package allPages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import steps.BaseSteps;
 
 public class SelectProduct extends BasePage{
 
-    public SelectProduct(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+    public SelectProduct() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
     }
     @FindBy (xpath = "//*[@name='regionType']")
     WebElement regionList;

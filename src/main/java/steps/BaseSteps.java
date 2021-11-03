@@ -1,7 +1,7 @@
 package steps;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import util.TestProperties;
@@ -14,7 +14,7 @@ public class BaseSteps {
     static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
 
-    @BeforeClass
+    @Before
     public static void beforeTest(){
         System.setProperty("webdriver.chrome.driver",properties.getProperty("driver.path"));
         baseUrl = properties.getProperty("baseUrl");
@@ -23,7 +23,7 @@ public class BaseSteps {
         driver.manage().window().maximize();
         driver.get(baseUrl);
     }
-    @AfterClass
+    @After
     public static void afterTest() throws InterruptedException {
         Thread.sleep(5000);
         driver.quit();

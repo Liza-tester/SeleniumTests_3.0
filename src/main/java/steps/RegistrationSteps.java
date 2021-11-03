@@ -3,40 +3,32 @@ package steps;
 import allPages.RegistrationPage;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.HashMap;
 
-public class RegistrationSteps extends BaseSteps {
+public class RegistrationSteps {
 
     @Step("Поле {0} : значение {1}")
     public void stepFillField(String name, String value) {
-        new RegistrationPage(driver).fillField(name, value);
+        new RegistrationPage().fillField(name, value);
     }
 
-    @Step("Поле {0}")
+    @Step("Поле {0} : значение {1}")
     public void stepCheckFieldValue(String name, String value) {
-        new RegistrationPage(driver).checkFieldValue(name, value);
+        new RegistrationPage().checkFieldValue(name, value);
     }
-
-    @Step("Проверено заполнение полей")
-    public void stepCheckFieldsValue(HashMap <String, String> fields) {
-        fields.forEach(this::stepCheckFieldValue);
-    }
-
-    @Step("Заполнены поля формы:")
-    public void stepFillFields(HashMap <String, String> fields) {
-        fields.forEach(this::stepFillField);
-    }
-
 
     @Step("Нажата кнопка - Продолжить")
     public void stepPressContinue() {
-        new RegistrationPage(driver).pressContinue();
+        new RegistrationPage().pressContinue();
     }
 
 
-    @Step("Проверены уведомления об ошибках заполнения")
-    public void stepCheckNotifications(){
-        new RegistrationPage(driver).checkNotifications();
+    @Step("Появилось уведомление об ошибке заполнения")
+    public void stepCheckError(){
+        new RegistrationPage().checkError();
     }
 
+    @Step("Поле {0} : уведомление - {1}")
+    public void stepCheckNotification(String name, String value){
+        new RegistrationPage().checkNotification(name, value);
+    }
 }

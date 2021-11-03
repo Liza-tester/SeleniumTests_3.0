@@ -2,17 +2,17 @@ package allPages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import steps.BaseSteps;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrationPage extends BasePage {
-    public RegistrationPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+    public RegistrationPage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
         fill_map();
     }
 
@@ -44,11 +44,11 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "documentDate")
     WebElement documentDate;
 
-    @FindBy(id = "phone")
+    @FindBy(name = "phone")
     WebElement phone;
-    @FindBy(id = "email")
+    @FindBy(name = "email")
     WebElement email_1;
-    @FindBy(id = "repeatEmail")
+    @FindBy(name = "repeatEmail")
     WebElement email_2;
 
     @FindBy(xpath = "//*[contains(text(),'Продолжить')]")
@@ -79,6 +79,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public void checkFieldValue(String field, String value) {
+
         if (field.equals("Пол"))
             Assert.assertEquals(value,
                     sex.findElement(By.xpath(".//label[text()='" + value + "']")).getText());
@@ -95,14 +96,14 @@ public class RegistrationPage extends BasePage {
     public void pressContinue(){
         scrollAndClick(buttonContinue);
     }
-    public void checkNotifications(){
-        Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//*[@name='phone']//validation-message")).getText());
-        Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//*[@name='email']//validation-message")).getText());
-        Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//*[@name='repeatEmail']//validation-message")).getText());
+
+    public void checkError(){
         Assert.assertEquals("При заполнении данных произошла ошибка", driver.findElement(
                 By.xpath("//*[contains(@role,'alert-form')]")).getText());
+    }
+    public void checkNotification(String name, String value){
+
+        Assert.assertEquals(value,
+                map.get(name).findElement(By.xpath(".//validation-message")).getText());
     }
 }
