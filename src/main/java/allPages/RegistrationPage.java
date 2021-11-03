@@ -32,7 +32,7 @@ public class RegistrationPage extends BasePage {
     WebElement middleName;
     @FindBy(id = "person_birthDate")
     WebElement birthDate;
-    @FindBy(xpath = "//div[5]/div/form-control-label/div/radio-button-group/div/div")
+    @FindBy(xpath = "//*[@title = 'Пол']")
     WebElement sex;
 
     @FindBy(id = "passportSeries")
@@ -51,7 +51,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "repeatEmail")
     WebElement email_2;
 
-    @FindBy(xpath = "//button[contains(text(),'Продолжить')]")
+    @FindBy(xpath = "//*[contains(text(),'Продолжить')]")
     WebElement buttonContinue;
 
     Map<String, WebElement> map = new HashMap<>();
@@ -81,12 +81,12 @@ public class RegistrationPage extends BasePage {
     public void checkFieldValue(String field, String value) {
         if (field.equals("Пол"))
             Assert.assertEquals(value,
-                    sex.findElement(By.xpath(".//label[contains(text(),'" + value + "')]")).getText());
+                    sex.findElement(By.xpath(".//label[text()='" + value + "']")).getText());
         else Assert.assertEquals(value, getField(map.get(field)));
     }
     public void fillField(String field, String value){
         if (field.equals("Пол")){
-            sex.findElement(By.xpath(".//label[contains(text(),'" + value + "')]")).click();}
+            sex.findElement(By.xpath(".//label[text()='" + value + "']")).click();}
         else{
             setField(map.get(field), value);
              if (field.startsWith("Дата")) lastName.click();
@@ -97,11 +97,11 @@ public class RegistrationPage extends BasePage {
     }
     public void checkNotifications(){
         Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//input-phone2/span/validation-message/span")).getText());
+                By.xpath("//*[@name='phone']//validation-message")).getText());
         Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//div[2]//input-email/span/validation-message/span")).getText());
+                By.xpath("//*[@name='email']//validation-message")).getText());
         Assert.assertEquals("Поле не заполнено.", driver.findElement(
-                By.xpath("//div[3]//input-email/span/validation-message/span")).getText());
+                By.xpath("//*[@name='repeatEmail']//validation-message")).getText());
         Assert.assertEquals("При заполнении данных произошла ошибка", driver.findElement(
                 By.xpath("//*[contains(@role,'alert-form')]")).getText());
     }

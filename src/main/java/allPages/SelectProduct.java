@@ -12,25 +12,25 @@ public class SelectProduct extends BasePage{
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-    @FindBy (xpath = "//input-select")
+    @FindBy (xpath = "//*[@name='regionType']")
     WebElement regionList;
 
-    @FindBy (xpath = "//input-select/div/div/div/ul")
+    @FindBy (xpath = "//*[@name='regionType']//*[@role='menu']")
     WebElement regions;
 
-    @FindBy (xpath = "//form/div/fieldset[6]/div")
+    @FindBy (xpath = "//*[text() = 'Выберите сумму страховой защиты']/following-sibling::*")
     WebElement sums;
 
-    @FindBy (xpath = "//button[contains(text(), 'Оформить')]")
+    @FindBy (xpath = "//button[text()= 'Оформить']")
     WebElement buttonCheckout;
 
     public void selectRegion(String region){
     regionList.click();
-    regions.findElement(By.xpath(".//*[contains(text(),'" + region + "')]")).click();
+    regions.findElement(By.xpath(".//*[text()='" + region + "']")).click();
     }
 
     public void selectSum(String sum){
-        WebElement element = sums.findElement(By.xpath("//h3[contains(text(),'" + sum + "')]"));
+        WebElement element = sums.findElement(By.xpath("//*[text() ='" + sum + "']"));
         scrollAndClick(element);
     }
 

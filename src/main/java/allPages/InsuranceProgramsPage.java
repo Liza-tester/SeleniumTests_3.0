@@ -13,11 +13,11 @@ public class InsuranceProgramsPage extends BasePage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//*[@id='page-main']/div[1]/div/div[2]/div[4]/div/div")
+    @FindBy(xpath = "//*[@class='product-catalog__carousel_row']")
     WebElement insurancePrograms;
 
     public void selectInsuranceProgram(String program) {
-        WebElement element = insurancePrograms.findElement(By.xpath(".//*[contains(text(),'" + program + "')]"));
+        WebElement element = insurancePrograms.findElement(By.xpath(".//*[text() ='" + program + "']"));
         scrollAndClick(element);
     }
 

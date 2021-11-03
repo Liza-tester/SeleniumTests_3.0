@@ -13,12 +13,11 @@ public class StartPage extends BasePage{
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//*[@id='main-page']/div[1]/div/div[4]/nav/div/ul")
+    @FindBy(xpath = "//*[@aria-label='Основное меню']")
      WebElement menuItems;
 
-    @FindBy(xpath = "//*[@id='main-page']/div[1]/div/div[4]/nav/div/ul/li[9]/div/div[1]/ul")
+    @FindBy(xpath = "//li[9]/div/div[1]/ul")
     WebElement insuranceItems;
-
     public void selectMenuItem(String itemName){
         menuItems.findElement(By.xpath(".//*[contains(text(), '"+itemName+"')]")).click();
     }

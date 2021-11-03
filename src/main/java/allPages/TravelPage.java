@@ -14,13 +14,14 @@ public class TravelPage extends BasePage{
         this.driver = driver;
     }
 
-    @FindBy (xpath = "//*[@id='page-main']/div[1]/div/div/div/div/div/div[1]/h1")
+    @FindBy (xpath = "//*[@data-test-id='PageTeaserDict_header']")
     WebElement title;
 
-    @FindBy (xpath = "//span[contains(text(),'Оформить онлайн')]")
+
+    @FindBy (xpath = "//span[text()='Оформить онлайн']")
     WebElement buttonOnline;
 
-    @FindBy (xpath = "//span[contains(text(),'Оформить на сайте')]")
+    @FindBy (xpath = "//span[text()='Оформить на сайте']")
     WebElement buttonOnWebsite;
 
     public String getTitle() {
